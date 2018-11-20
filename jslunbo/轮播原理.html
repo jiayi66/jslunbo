@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;IE=edge,chrome=1"/>
+<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no, email=no"/>
+<meta name="msapplication-tap-highlight" content="no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="x5-page-mode" content="app"/>
+<meta name="browsermode" content="application"/>
+<meta name="wap-font-scale" content="no"/>
+<meta name="author" content="feilong.org"/>
+<title>轮播原理</title>
+<style>
+.a0itm{height:80px;}
+.a0itm0{background-color:#ccc;}
+.a0itm1{background-color:#ddd;}
+.a0itm2{background-color:#eee;}
+.a0dot{display:inline-block;vertical-align:middle; width:28px;height:28px;background-color:#eee;
+color:#fff;}
+
+
+.a0dot.on{background-color:#f00;}
+.a0itm.now{background-color:#0f0;}
+
+
+</style>
+
+
+</head>
+<body id="jBase">
+
+<div class="a0mod cf">
+	<ul class="a0cot">
+		<li class="a0itm a0itm0"></li>
+		<li class="a0itm a0itm1"></li>
+		<li class="a0itm a0itm2"></li>
+	</ul>
+	<p class="a0dots cf">
+		<b class="a0dot a0dot0"></b>
+		<b class="a0dot a0dot1"></b>
+		<b class="a0dot a0dot2"></b>
+	</p>
+<!--a0mod--></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+a0Lunbo();
+
+
+
+function a0Lunbo(){
+	var a0bs=window.document.getElementsByClassName('a0dot');/*IE9+*/
+	var a0itms=window.document.getElementsByClassName('a0itm');/*IE9+*/
+	var len=a0bs.length;
+	for(var i=0; i<len; i++){
+	console.log('i=',i);
+	a0ddd(a0bs,a0itms,i);//
+	}
+	console.log('i2=',i);
+}
+
+function a0ddd(a0bs,a0itms,i){
+	var a0b=a0bs[i];
+	a0b.onclick=function(){
+		console.log('i=',i);
+		var a0itm=a0itms[i];
+		console.log('a0itm=',a0itm);
+		
+		a0removeCs(a0bs,'on');
+		a0removeCs(a0itms,'now');
+		
+		a0b.classList.add('on');
+		a0itm.classList.add('now');
+	};
+}
+
+
+function a0removeCs(as,ysm){
+	var len=as.length;
+	for(var i=0; i<len; i++){
+		var a=as[i];
+		a.classList.remove(ysm);
+	}
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

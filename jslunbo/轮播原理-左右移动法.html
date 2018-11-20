@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;IE=edge,chrome=1"/>
+<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no, email=no"/>
+<meta name="msapplication-tap-highlight" content="no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="x5-page-mode" content="app"/>
+<meta name="browsermode" content="application"/>
+<meta name="wap-font-scale" content="no"/>
+<meta name="author" content="feilong.org"/>
+<title>轮播原理运用2</title>
+<style>
+
+
+
+ul{margin:0;padding:0;list-style:none}
+p{margin-top:0;margin-bottom:0}
+
+
+.cf:before,.cf:after{display:table;line-height:0;content:' '}
+.cf:after{clear:both}
+.cf{*zoom:1}
+
+
+.a0mod{position:relative; width:600px;overflow:hidden;}
+
+
+.a0cot{width:100%;height:80px;font-size:0;white-space:nowrap; }
+.a0itm{position:relative;display:inline-block;vertical-align:top; width:100%;height:80px;font-size:14px;text-align:center;}
+.a0itm0{background-color:#ccc;}
+.a0itm1{background-color:#ddd;}
+.a0itm2{background-color:#eee;}
+.a0dot{display:inline-block;vertical-align:middle; width:28px;height:28px;background-color:#eee;
+color:#fff;}
+
+.a0dots{position:absolute;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);bottom:6px;}
+.a0dot.on{background-color:#f00;}
+.a0itm.now{color:#f00;font-size:20px;}
+
+
+.a0itm,.a0itm.now{transition:left 1s;-moz-transition:left 1s;-webkit-transition:left 1s;}
+
+.a0jt{position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:30px;height:30px;background-color:#0f0;color:#fff;}
+.a0zuojt{left:0;}
+.a0youjt{right:0;}
+
+
+</style>
+
+
+</head>
+<body id="jBase">
+
+
+
+<div class="a0mod">
+	<ul class="a0cot cf">
+		<li class="a0itm a0itm0">0</li>
+		<li class="a0itm a0itm1">1</li>
+		<li class="a0itm a0itm2">2</li>
+	</ul>
+	<p class="a0dots">
+		<b class="a0dot a0dot0"></b>
+		<b class="a0dot a0dot1"></b>
+		<b class="a0dot a0dot2"></b>
+	</p>
+	
+	<b class="a0jt a0zuojt"> &lt; </b>
+	<b class="a0jt a0youjt"> &gt; </b>
+
+<!--a0mod--></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+a0Lunbo();
+function a0Lunbo(){
+	var a0bs=window.document.getElementsByClassName('a0dot');/*IE9+*/
+	var a0itms=window.document.getElementsByClassName('a0itm');/*IE9+*/
+	var len=a0bs.length;
+	
+	a0MoveLis(a0itms,0,0);
+	a0EditCs(a0bs,a0itms,0);
+	
+	for(var i=0; i<len; i++){
+		//console.log('i=',i);
+		a0ddd(a0bs,a0itms,i);//
+	}
+	//console.log('i2=',i);
+	
+	
+	var a0zuojts=window.document.getElementsByClassName('a0zuojt');/*IE9+*/
+	a0zuojts[0].onclick=function(){
+		
+		var i0=a0hasCs(a0bs,'on');
+		var i=a0FixI(i0-1,a0bs.length);
+		
+		//console.log('i0=',i0);
+		//console.log('i=',i);
+	
+		a0MoveLis(a0itms,i,i0);
+		a0EditCs(a0bs,a0itms,i);
+		
+	};
+	
+	var a0youjts=window.document.getElementsByClassName('a0youjt');/*IE9+*/
+	a0youjts[0].onclick=function(){
+		
+		var i0=a0hasCs(a0bs,'on');
+		var i=a0FixI(i0+1,a0bs.length);
+		
+		//console.log('i0=',i0);
+		//console.log('i=',i);
+	
+		a0MoveLis(a0itms,i,i0);
+		a0EditCs(a0bs,a0itms,i);
+		
+	};
+	
+}
+
+
+
+
+
+
+
+function a0ddd(a0bs,a0itms,i){
+	var a0b=a0bs[i];
+	
+	
+	a0b.onclick=function(){
+		
+		var i0=a0hasCs(a0bs,'on');
+		
+		//console.log('i0=',i0);
+		//console.log('i=',i);
+	
+		a0MoveLis(a0itms,i,i0);
+		a0EditCs(a0bs,a0itms,i);
+		
+	};
+	
+	
+	
+	
+}
+
+
+function a0removeCs(as,ysm){
+	var len=as.length;
+	for(var i=0; i<len; i++){
+		var a=as[i];
+		a.classList.remove(ysm);
+	}
+}
+
+
+function a0hasCs(as,ysm){
+	var len=as.length;var n=null;
+	for(var k=0; k<len; k++){
+		var x=as[k].classList.contains(ysm);
+		if(x){ n=k;}
+	}
+	return n;
+}
+
+
+function a0MoveLis(lis,i,i0){
+	var fx=i-i0;  // yz:从右往左移动
+	var len=lis.length;
+	for(var n=0; n<len; n++){
+		lis[n].style.left='-'+i+'00%';
+	}
+}
+
+function a0EditCs(a0bs,a0itms,i){
+	var a0b=a0bs[i];
+	var a0itm=a0itms[i];
+		
+	a0removeCs(a0bs,'on');
+	a0removeCs(a0itms,'now');
+	
+	a0b.classList.add('on');
+	a0itm.classList.add('now');
+}
+
+
+function a0FixI(i,len){
+	if(i<0){
+		i=len-1;
+	}
+	if(i>len-1){
+		i=0;
+	}
+	return i;
+}
+
+
+
+
+</script>
+
+</body>
+</html>
